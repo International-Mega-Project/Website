@@ -15,6 +15,7 @@ var geocoder = new MapboxGeocoder({
 map.addControl(geocoder);
 
 
-geocoder.on('results', function (results) {
-    console.log(results);
+geocoder.on('results', function (response) {
+    var  array = response.request.response.body.features;
+    console.log(array[0].place_name);
 })
