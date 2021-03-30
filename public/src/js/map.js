@@ -6,14 +6,15 @@ var map = new mapboxgl.Map({
     zoom: 13
 });
 
-map.addControl(
-    new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-    })
-);
-/*
+
+var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl
+});
+
+map.addControl(geocoder);
+
+
 geocoder.on('results', function (results) {
     console.log(results);
 })
-*/
