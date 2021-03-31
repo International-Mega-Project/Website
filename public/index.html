@@ -184,8 +184,16 @@
                     </div>
                     <div class="col mapGridColHeight">
                         <form action="/" method="post" class="mapform">
-                            <label>Address: </label>
-                            <label id="mapformaddress"></label>
+                            <label class="mapLable">Street number: </label>
+                            <label class="mapTextBox" id="mapStreetNumber"></label><br>
+                            <label class="mapLable">Road name: </label>
+                            <label class="mapTextBox" id="mapStreetName"></label><br>
+                            <label class="mapLable">City: </label>
+                            <label class="mapTextBox" id="mapCity"></label><br>
+                            <label class="mapLable">Country: </label>
+                            <label class="mapTextBox" id="mapCountry"></label><br>
+                            <label class="mapLable">Long/Lat: </label>
+                            <label class="mapTextBox" id="mapLongLat"></label>
                         </form>
                     </div>
                 </div>
@@ -391,6 +399,7 @@
     <script src="vendors/is/is.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="assets/js/theme.js"></script>
+    <script src="src/js/weatherApi.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
 </body>

@@ -26,8 +26,12 @@ geocoder.on('results', function (response) {
     var coordinates = array[0].geometry.coordinates;
     lat = coordinates[0];
     long = coordinates[1];
-    console.log(array[0].place_name);
-    document.getElementById('mapformaddress').innerHTML = array[0].place_name;
+    console.log(array[0]);
+    document.getElementById('mapStreetNumber').innerHTML = array[0].address;
+    document.getElementById('mapStreetName').innerHTML = array[0].text;
+    document.getElementById('mapCity').innerHTML = array[0].context[2].text;
+    document.getElementById('mapCountry').innerHTML = array[0].context[4].text;
+    document.getElementById('mapLongLat').innerHTML = "Lat: "+array[0].center[0] + "  ,  Long: " + array[0].center[1];
 })
 
 function getWeatherDataButtonClick() {
