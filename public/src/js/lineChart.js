@@ -25,7 +25,7 @@ let myChart = new Chart(ctx, {
             getHours()  +":" + minutesNow, getHours()  +":" + minutesNow, getHours()  +":" + minutesNow, getHours()  +":" + minutesNow],
         datasets: [
             {
-                label: "My First dataset",
+                label: "Prediction",
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: "rgba(75, 192, 192, 0.4)",
