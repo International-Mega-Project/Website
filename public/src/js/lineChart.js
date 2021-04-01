@@ -1,20 +1,25 @@
 const ctx = document.getElementById('myChart');
 let now = new Date();
-let hourNow = now.getHours();
-let minutenow = now.getMinutes();
 
-if(minutenow<30) {
-    minutenow = "30";
+if(parseInt(now.getMinutes()) <30) {
+    now.setMinutes(30);
 } else {
-    minutenow = "00";
-    hourNow++;
+    now.setMinutes(0);
+    now.setHours(now.getHours() +1);
+
+}
+
+function getHours() {
+    now.setHours(now.getHours() + 3);
+    return now.getHours() -3;
+
 }
 
 let myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [hourNow +":" + minutenow, (hourNow +3)  +":" + minutenow, (hourNow +6)  +":" + minutenow, (hourNow +9)  +":" + minutenow, (hourNow +12)  +":" + minutenow,
-            (hourNow +15)  +":" + minutenow, (hourNow +18)  +":" + minutenow, (hourNow +21)  +":" + minutenow, (hourNow +24)  +":" + minutenow],
+        labels: [getHours() +":" + now.getMinutes(), getHours() +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(),
+            getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes()],
         datasets: [
             {
                 label: "My First dataset",
