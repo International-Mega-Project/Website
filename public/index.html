@@ -39,6 +39,7 @@
 
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
 
+
 </head>
 
 
@@ -57,7 +58,7 @@
                         <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link fw-medium active" aria-current="page" href="#home">Home</a></li>
                         <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" aria-current="page" href="#universities">Universities</a></li>
                         <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#mapSection">configuration</a></li>
-                        <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#services">Our Services </a></li>
+                        <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#services">services</a></li>
                     </ul>
                     <form class="ps-lg-5">
                         <button class="btn btn-outline-primary order-0" type="submit">login</button>
@@ -214,12 +215,12 @@
 
         <!-- ============================================-->
         <!-- <section> begin ============================-->
-        <section id="services">
+        <section id="services" class="bg-100 py-5">
 
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7 mx-auto text-center mb-4">
-                        <h5 class="fw-light fs-3 fs-lg-5 lh-sm mb-3">Our Services</h5>
+                        <h5 class="fw-light fs-3 fs-lg-5 lh-sm mb-3">Here we'll add the sliders for solar panel installation</h5>
                         <p class="mb-5">Executive Trade International is an University Application Centre, guiding Bangladeshi students to Australian, British, Canadian and Irish universities!</p>
                     </div>
                 </div>
@@ -314,8 +315,24 @@
         </section>
         <!-- <section> close ============================-->
         <!-- ============================================-->
+
+
         <!-- ============================================-->
         <!-- <section> begin ============================-->
+        <section id="PredictionChart">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </section>
+        <!-- <section> close ============================-->
+        <!-- ============================================-->
+
+
+
+
+        <!-- ============================================-->
+        <!-- <section> begin ============================-->
+
+
+
         <section class="py-0 bg-primary">
 
             <div class="container">
@@ -400,6 +417,9 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="assets/js/theme.js"></script>
     <script src="src/js/weatherApi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js";></script>
+    <script type="module" src="src/js/lineChart.js"></script>
+
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
 </body>

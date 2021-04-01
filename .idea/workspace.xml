@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51f43b15-46b1-421a-b1c7-1c4ef27570e8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/src/js/lineChart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/theme-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/theme-rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/theme-rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/theme-rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/theme.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/theme.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,6 +64,7 @@
       <workItem from="1617030552214" duration="2273000" />
       <workItem from="1617114837947" duration="2254000" />
       <workItem from="1617198676944" duration="5755000" />
+      <workItem from="1617279670719" duration="2139000" />
     </task>
     <servers />
   </component>
