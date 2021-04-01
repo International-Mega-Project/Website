@@ -6,20 +6,23 @@ if(parseInt(now.getMinutes()) <30) {
 } else {
     now.setMinutes(0);
     now.setHours(now.getHours() +1);
-
 }
+// 2 digit string for minutes
+let minutesNow = ("0" + now.getMinutes()).slice(-2);
+
+
 
 function getHours() {
+    let preventNegativeHours = now;
     now.setHours(now.getHours() + 3);
-    return now.getHours() -3;
-
+    return ("0" + preventNegativeHours.getHours()).slice(-2);
 }
 
 let myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: [getHours() +":" + now.getMinutes(), getHours() +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(),
-            getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes(), getHours()  +":" + now.getMinutes()],
+        labels: [now.getHours() +":" + minutesNow, getHours() +":" + minutesNow, getHours()  +":" + minutesNow, getHours()  +":" + minutesNow, getHours()  +":" + minutesNow,
+            getHours()  +":" + minutesNow, getHours()  +":" + minutesNow, getHours()  +":" + minutesNow, getHours()  +":" + minutesNow],
         datasets: [
             {
                 label: "My First dataset",
