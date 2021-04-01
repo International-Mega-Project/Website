@@ -1,5 +1,3 @@
-// import Chart from './node_modules/chart.js/src/chart.js';
-
 const ctx = document.getElementById('myChart');
 
 

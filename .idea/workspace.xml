@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51f43b15-46b1-421a-b1c7-1c4ef27570e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/src/js/lineChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Website.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Website.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/src/js/lineChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/src/js/lineChart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/src/js/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/src/js/map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/src/js/weatherApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/src/js/weatherApi.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +69,7 @@
       <workItem from="1617114837947" duration="2254000" />
       <workItem from="1617198676944" duration="5755000" />
       <workItem from="1617279670719" duration="2139000" />
+      <workItem from="1617289349413" duration="715000" />
     </task>
     <servers />
   </component>

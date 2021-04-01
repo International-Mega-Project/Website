@@ -25,7 +25,19 @@ geocoder.on('results', function (response) {
     lat = coordinates[0];
     long = coordinates[1];
     document.getElementById('mapLat').innerHTML = lat;
-    document.getElementById('mapLong').innerHTML = long
-        ;
-
+    document.getElementById('mapLong').innerHTML = long;
 })
+
+function getWeatherData() {
+    axios({
+        method: 'get',
+        url: 'https://v1.nocodeapi.com/jordivhw/ow/tsTdEvkyScufqCGI/byGeoCord/threeHourForecast',
+        params: {lat: lat,long: long},
+    }).then(function (response) {
+        // handle success
+        console.log(response.data);
+    }).catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+}

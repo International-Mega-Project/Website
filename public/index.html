@@ -10,7 +10,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Executive | Landing, Corporate &amp; Business Templatee</title>
+    <title>OR3</title>
 
 
     <!-- ===============================================-->
@@ -21,7 +21,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
     <link rel="manifest" href="assets/img/favicons/manifest.json">
-    <script data-main="scripts/app" src="scripts/require.js"></script>
+<!--    <script data-main="scripts/app" src="scripts/require.js"></script>-->
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
 
@@ -188,6 +188,7 @@
                             <label id="mapLat" hidden></label>
                             <label id="mapLong" hidden></label>
                             <input type="button" name="name" value="Get UV Info" class="btn btn-lg btn-primary hover-top btn-glow" id="mapButton" onclick="getInformation()" />
+                            <input type="button" name="getWeather" value="Get Weather info" class="btn btn-lg btn-primary hover-top btn-glow" id="weatherButton" onclick="getWeatherData()" />
                         </form>
                     </div>
                 </div>
@@ -393,8 +394,11 @@
     <script src="assets/js/theme.js"></script>
     <script src="src/js/weatherApi.js"></script>
     <script src="src/js/OpenUvApi.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" ;></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script type="module" src="src/js/lineChart.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
