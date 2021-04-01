@@ -184,33 +184,14 @@
                         <div id="map"></div>
                     </div>
                     <div class="col mapGridColHeight">
-                        <form action="/" method="post" class="mapform">
-                            <label class="mapLable">Street number: </label>
-                            <label class="mapTextBox" id="mapStreetNumber"></label><br>
-                            <label class="mapLable">Road name: </label>
-                            <label class="mapTextBox" id="mapStreetName"></label><br>
-                            <label class="mapLable">City: </label>
-                            <label class="mapTextBox" id="mapCity"></label><br>
-                            <label class="mapLable">Country: </label>
-                            <label class="mapTextBox" id="mapCountry"></label><br>
-                            <label class="mapLable">Long/Lat: </label>
-                            <label class="mapTextBox" id="mapLongLat"></label>
+                        <form class="mapform">
+                            <label id="mapLat" hidden></label>
+                            <label id="mapLong" hidden></label>
+                            <input type="button" name="name" value="Get UV Info" class="btn btn-lg btn-primary hover-top btn-glow" id="mapButton" onclick="getInformation()" />
                         </form>
                     </div>
                 </div>
             </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col weatherBtnColHeight">
-                        <a class="btn btn-lg btn-primary hover-top btn-glow" onclick="getWeatherDataButtonClick()">
-                            get weather data
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
         </section>
 
         <!-- ============================================-->
@@ -315,8 +296,6 @@
         </section>
         <!-- <section> close ============================-->
         <!-- ============================================-->
-
-
         <!-- ============================================-->
         <!-- <section> begin ============================-->
         <section id="PredictionChart">
@@ -324,10 +303,6 @@
         </section>
         <!-- <section> close ============================-->
         <!-- ============================================-->
-
-
-
-
         <!-- ============================================-->
         <!-- <section> begin ============================-->
 
@@ -417,7 +392,8 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="assets/js/theme.js"></script>
     <script src="src/js/weatherApi.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js";></script>
+    <script src="src/js/OpenUvApi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" ;></script>
     <script type="module" src="src/js/lineChart.js"></script>
 
 
