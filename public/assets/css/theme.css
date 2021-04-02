@@ -8566,6 +8566,8 @@ fieldset:disabled .btn {
 
 .mb-4 {
   margin-bottom: 1.8rem !important;
+  /*width: 2rem !important;*/
+  /*height: 2rem !important;*/
 }
 
 .mb-5 {
