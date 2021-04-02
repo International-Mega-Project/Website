@@ -41,5 +41,17 @@ let myChart = new Chart(ctx, {
                 pointHitRadius: 10,
                 data: [65, 59, 80, 81, 56, 55, 40, 50, 65],
             }
-        ]}
+        ]},
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function (value, index, values) {
+                        return value + "kwh";
+                    }
+                }
+            }]
+        }
+    }
 });
