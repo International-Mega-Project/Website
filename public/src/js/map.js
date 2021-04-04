@@ -3,8 +3,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicnVhbmp2djIzIiwiYSI6ImNra3pzdnNjNDBtcm4ycHFvc
 let lat;
 let long;
 
-var map_weather = new mapboxgl.Map({
-    container: 'map_weather',
+var map = new mapboxgl.Map({
+    container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [-79.4512, 43.6568],
     zoom: 13
@@ -16,7 +16,7 @@ var geocoder = new MapboxGeocoder({
     mapboxgl: mapboxgl
 });
 
-map_weather.addControl(geocoder);
+map.addControl(geocoder);
 
 
 geocoder.on('results', function (response) {

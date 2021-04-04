@@ -377,4 +377,4 @@ var scrollToTop = function scrollToTop() {
 docReady(navbarInit);
 docReady(detectorInit);
 docReady(scrollToTop);
-//# sourceMappingURL=theme.js.map_weather
+//# sourceMappingURL=theme.js.map
