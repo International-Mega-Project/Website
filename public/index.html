@@ -179,13 +179,13 @@
         <!-- ============================================-->
         <!--<div id="map"></div>-->
         <section id="mapSection" class="mapSection">
-            <div class="container">
+            <div class="container mapGridColHeight">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm">
                         <div id="map"></div>
                     </div>
-                    <div class="col mapGridColHeight">
-                        <form class="mapform">
+                    <div class="col-sm mapGridColHeight">
+                        <form class="mapform mapGridColHeight">
                             <label id="mapLat" hidden></label>
                             <label id="mapLong" hidden></label>
                             <canvas id="myChart"></canvas>
@@ -196,9 +196,11 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col text-center mt-4">
-                        <input type="button" name="getWeather" value="Get Weather info" class="btn btn-lg btn-primary hover-top btn-glow button-width" id="weatherButton" onclick="getWeatherData()">
-                        <input type="button" name="name" value="Get UV Info" class="btn btn-lg btn-primary hover-top btn-glow button-width" id="mapButton" onclick="getInformation()" />
+                    <div class="col-sm text-center mt-4">
+                        <input type="button" name="getWeather" value="Weather info" class="btn btn-lg btn-primary hover-top btn-glow w-50" id="weatherButton" onclick="getWeatherData()">
+                    </div>
+                    <div class="col-sm text-center mt-4">
+                        <input type="button" name="name" value="UV Info" class="btn btn-lg btn-primary hover-top btn-glow w-50" id="mapButton" onclick="getInformation()" />
                     </div>
                 </div>
                 <div class="row">
