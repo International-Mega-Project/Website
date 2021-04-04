@@ -179,14 +179,9 @@
         <!-- ============================================-->
         <!--<div id="map"></div>-->
         <section id="mapSection" class="mapSection">
-            <div class="row">
-                    <input type="button" name="getWeather" value="Get Weather info" class="btn btn-lg btn-primary hover-top btn-glow" id="weatherButton" onclick="getWeatherData()">
-                    <input type="button" name="name" value="Get UV Info" class="btn btn-lg btn-primary hover-top btn-glow" id="mapButton" onclick="getInformation()" />
-            </div>
-
             <div class="container">
                 <div class="row">
-                    <div class="col mapGridColHeight">
+                    <div class="col">
                         <div id="map"></div>
                     </div>
                     <div class="col mapGridColHeight">
@@ -195,6 +190,54 @@
                             <label id="mapLong" hidden></label>
                             <canvas id="myChart"></canvas>
 
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center pt-4">
+                        <input type="button" name="getWeather" value="Get Weather info" class="btn btn-lg btn-primary hover-top btn-glow button-width" id="weatherButton" onclick="getWeatherData()">
+                        <input type="button" name="name" value="Get UV Info" class="btn btn-lg btn-primary hover-top btn-glow button-width" id="mapButton" onclick="getInformation()" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col pt-4">
+                        <form class="mapform p-3">
+                            <div class="form-group">
+                                <label for="solarPanelManufacturer">Solar panel manufacturer:</label>
+                                <input type="text" class="form-control" id="solarPanelManufacturer" placeholder="Manufacturer"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="solarPanelModel">Solar panel model:</label>
+                                <input type="text" class="form-control" id="solarPanelModel" placeholder="Model"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="solarPanelCapacity">Solar panel installed capacity:</label>
+                                <input type="text" class="form-control" id="solarPanelCapacity" placeholder="Capacity (kWp)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="solarPanelazimuth">Solar panel azimuth:</label>
+                                <input type="text" class="form-control" id="solarPanelazimuth" placeholder="Azimuth"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="solarPanelOrientation">Solar panel orientation:</label>
+                                <select class="form-control" id="solarPanelOrientation">
+                                    <option value="0">Select Orientation</option>
+                                    <option value="1">North</option>
+                                    <option value="3">North East</option>
+                                    <option value="4">East</option>
+                                    <option value="5">South East</option>
+                                    <option value="6">South</option>
+                                    <option value="7">South West</option>
+                                    <option value="8">West</option>
+                                    <option value="9">North West</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="solarPanelpitch">Solar panel pitch:</label>
+                                <input type="text" class="form-control" id="solarPanelpitch" placeholder="Pitch"/>
+                            </div>
                         </form>
                     </div>
                 </div>

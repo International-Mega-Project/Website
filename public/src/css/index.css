@@ -29,3 +29,9 @@ body {
     width: 125px;
     margin-left: 20px;
 }
+.button-width {
+    width: 20%;
+}
+.row-height {
+    background-color: red;
+}
