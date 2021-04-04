@@ -4990,4 +4990,4 @@
   return index_umd;
 
 })));
-//# sourceMappingURL=bootstrap.js.map_weather
+//# sourceMappingURL=bootstrap.js.map
