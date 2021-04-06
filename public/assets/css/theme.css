@@ -18211,3 +18211,100 @@ ul {
 -----------------------------------------------*/
 
 /*# sourceMappingURL=theme.css.map */
+
+#inputFormSolarSystem input,#inputFormSolarSystem select {
+  background: rgba(115,174,64,0.2) !important;
+  color: #61993a !important;
+}
+
+#inputFormSolarSystem input::placeholder {
+  color: #61993a !important;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 7px #61993a;
+  background: #7ecb49;
+  border-radius: 6px;
+  border: 1px solid #61993a;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 1px #25f109;
+  border: 2px solid #1a6f00;
+  height: 29px;
+  width: 21px;
+  border-radius: 9px;
+  background: #61993a;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -10px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #7ecb49;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 7px #61993a;
+  background: #7ecb49;
+  border-radius: 6px;
+  border: 1px solid #61993a;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 1px #25f109;
+  border: 2px solid #1a6f00;
+  height: 29px;
+  width: 21px;
+  border-radius: 9px;
+  background: #61993a;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 12px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #7ecb49;
+  border: 1px solid #61993a;
+  border-radius: 12px;
+  box-shadow: 1px 1px 7px #61993a;
+}
+input[type=range]::-ms-fill-upper {
+  background: #7ecb49;
+  border: 1px solid #61993a;
+  border-radius: 12px;
+  box-shadow: 1px 1px 7px #61993a;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 1px #25f109;
+  border: 2px solid #1a6f00;
+  height: 29px;
+  width: 21px;
+  border-radius: 9px;
+  background: #61993a;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #7ecb49;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #7ecb49;
+}
