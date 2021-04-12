@@ -1,24 +1,3 @@
-function ReadSolarInputFile(path) {
-    var input = [];
-    var fso = new ActiveXObject('Scripting.FileSystemObject'),
-        iStream = fso.OpenTextFile(path, 1, false);
-    while (!iStream.AtEndOfStream) {
-        var line = iStream.ReadLine();
-        console.log(line);
-    }
-
-    iStream.Close();
-}
-
-function LoadSolatInputOrientation() {
-    var path = "Files/SolarInput/manufacturer.scv";
-    ReadSolarInputFile();
-}
-
-function LoadSolatInputManufacturer() {
-    var path = "Files/SolarInput/manufacturer.scv";
-}
-
 function DisplayPitchValue(input) {
     document.getElementById("solarPanelpitch").innerHTML = "Solar panel pitch: " + input + "&#176";
 }
