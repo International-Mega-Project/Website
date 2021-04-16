@@ -32,7 +32,9 @@ function getWeatherData() {
     axios({
         method: 'get',
         url: 'https://v1.nocodeapi.com/jordivhw/ow/tsTdEvkyScufqCGI/byGeoCord/threeHourForecast',
-        params: {lat: lat,long: long},
+        //params: {lat: lat,long: long},
+        // that building karina asked for
+        params: {lat: 52.946034,long: -1.139356}
     }).then(function (response) {
         // handle success
         makeChart(response.data);
@@ -42,6 +44,26 @@ function getWeatherData() {
     })
 
 
+}
+
+function logMLdata(data) {
+    neededDataForMl = [];
+    data.list.forEach(w => {
+        let date = w.dt;
+        let temp_max = w.main.temp_max;
+        let temp_min = w.main.temp_min;
+        let pressure = w.main.pressure;
+        main = {
+            temp_min,
+            temp_max,
+            pressure
+        }
+        neededDataForMl.push({
+            date,
+            main
+        })
+    })
+    console.log(neededDataForMl);
 }
 
 function makeChart(data) {
@@ -75,7 +97,7 @@ function makeChart(data) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        // Include a dollar sign in the ticks
+                        // Include a degree sign in the ticks
                         callback: function (value, index, values) {
                             return value + "°C";
                         }
@@ -84,6 +106,8 @@ function makeChart(data) {
             }
         }
     });
+
+    logMLdata(data);
 }
 
 function getTemperatures(data) {
