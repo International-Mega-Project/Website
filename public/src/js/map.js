@@ -32,8 +32,9 @@ function getWeatherData() {
     axios({
         method: 'get',
         url: 'https://v1.nocodeapi.com/jordivhw/ow/tsTdEvkyScufqCGI/byGeoCord/threeHourForecast',
+        //TODO: uncomment next line to use the mapinfo for weather data
         //params: {lat: lat,long: long},
-        // that building karina asked for
+        //TODO: put next line in comment to the mapinfo for weather data --> that building karina asked for
         params: {lat: 52.946034,long: -1.139356}
     }).then(function (response) {
         // handle success
@@ -46,7 +47,7 @@ function getWeatherData() {
 
 }
 
-function logMLdata(data) {
+function dowloadDataAsCSV(data) {
     neededDataForMl = [];
     data.list.forEach(w => {
         let date = w.dt;
@@ -119,7 +120,8 @@ function makeChart(data) {
         }
     });
 
-    logMLdata(data);
+    // TODO: put next line in comment to stop downloading CSV file when clicking "weather data"
+    dowloadDataAsCSV(data);
 }
 
 function getTemperatures(data) {
