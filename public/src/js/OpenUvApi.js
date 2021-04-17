@@ -1,6 +1,7 @@
 function getUVIndex() {
-    var lat = document.getElementById('mapLat').innerHTML;
-    var lng = document.getElementById('mapLong').innerHTML;
+    var lat = 52.946034;
+    var lng = -1.139356;
+
 
     $.ajax({
         type: 'GET',
@@ -10,7 +11,7 @@ function getUVIndex() {
         },
         url: 'https://api.openuv.io/api/v1/uv?lat=' + lat + '&lng=' + lng,
         success: function (response) {
-            //handle successful response
+            console.log(response);
         },
         error: function (response) {
             // handle error response
