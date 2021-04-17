@@ -50,20 +50,32 @@ function logMLdata(data) {
     neededDataForMl = [];
     data.list.forEach(w => {
         let date = w.dt;
-        let temp_max = w.main.temp_max;
-        let temp_min = w.main.temp_min;
+        let temp_max = (w.main.temp_max - 273.15).toFixed(2);
+        let temp_min = (w.main.temp_min - 273.15).toFixed(2);
         let pressure = w.main.pressure;
-        main = {
+
+        neededDataForMl.push({
+            date,
             temp_min,
             temp_max,
             pressure
-        }
-        neededDataForMl.push({
-            date,
-            main
         })
     })
-    console.log(neededDataForMl);
+
+    const items = neededDataForMl
+    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+    const header = Object.keys(items[0])
+    const csv = [
+        header.join(','), // header row first
+        ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+    ].join('\r\n')
+
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'data_tamar.csv';
+    hiddenElement.click();
+    console.log(csv);
 }
 
 function makeChart(data) {
@@ -121,6 +133,8 @@ function getTemperatures(data) {
     array = [arrayLabels, arrayTemps];
     return array;
 }
+
+
 
 
 
