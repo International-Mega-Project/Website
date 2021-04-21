@@ -23,9 +23,14 @@ body {
 .mapform {
     border-style: solid;
     border-radius: 10px;
-    height: 100%;
 }
 .mapLable {
     width: 125px;
     margin-left: 20px;
+}
+.button-width {
+    width: 20%;
+}
+.row-height {
+    background-color: red;
 }
