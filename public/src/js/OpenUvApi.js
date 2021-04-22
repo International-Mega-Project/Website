@@ -16,7 +16,6 @@ function getUVIndex() {
             var collection = response.result;
 
             console.log(collection);
-            console.log("happy");
             //array.push(["SunPositionAltitude", "SunPositionAzimuth", "Uv", "UvTime"])
 
             console.log(array);
@@ -36,7 +35,18 @@ function dowloadUvDataAsCSV(collection) {
         let SunPositionAzimuth = collection[index].sun_position.azimuth;
         let Uv = collection[index].uv;
         let Time = collection[index].uv_time;
-        uvArray.push({ SunPositionAltitude, SunPositionAzimuth, Uv, Time });
+        let splitDateTime = Time.split("T");
+        let splitTime = splitDateTime[1].split(":");
+        let splitTimeMin = parseInt(splitTime[0]);
+        if (parseInt(splitTime[1]) >= 30) {
+            splitTimeMin += 1;
+            splitTime[0] = splitTimeMin;
+        }
+        let myDateTime = splitDateTime[0] +" "+splitTime[0]+":00:00"
+        //let DateTimeSplitString = DateTime.split("T")
+        //console.log("date: " + DateTimeSplitString[0])
+        //console.log("time: " + DateTimeSplitString[1])
+        uvArray.push({ SunPositionAltitude, SunPositionAzimuth, Uv, myDateTime });
     }
     const items = uvArray
     const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here

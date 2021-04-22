@@ -50,11 +50,11 @@ function getWeatherData() {
 function dowloadDataAsCSV(data) {
     neededDataForMl = [];
     data.list.forEach(w => {
-        let date = w.dt;
+        let date = w.dt_txt;
         let temp_max = (w.main.temp_max - 273.15).toFixed(2);
         let temp_min = (w.main.temp_min - 273.15).toFixed(2);
         let pressure = w.main.pressure;
-
+        console.log(typeof date);
         neededDataForMl.push({
             date,
             temp_min,
