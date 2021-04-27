@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="src/css/index.css" />
 
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
-    <script src="src/js/OpenUvApi.js"></script>
+    <script src="src/js/map.js"></script>
 
 
 </head>
@@ -174,45 +174,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm text-center mt-4">
-                        <input type="button" name="getWeather" value="Weather info" class="btn btn-lg btn-primary hover-top btn-glow w-50" id="weatherButton" onclick="getWeatherData()">
-                    </div>
-                    <div class="col-sm text-center mt-4">
-                        <input type="button" name="BothInfo" value="Both" class="btn btn-lg btn-primary hover-top btn-glow w-50" id="bothButton" onclick="getUVIndex()" />
-                    </div>
-                    <div class="col-sm text-center mt-4">
-                        <input type="button" name="UVInfo" value="UV Info" class="btn btn-lg btn-primary hover-top btn-glow w-50" id="UvButton" onclick="getUVIndex()" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm text-center mt-4">
-                        <div class="form-group mb-2">
-                            <label for="" class="sr-only">Place Holder</label>
-                            <input type="text" readonly class="form-control-plaintext text-center" id="" value="place holder">
-                        </div>
-                    </div>
-                    <div class="col-sm text-center mt-4">
-                        <div class="form-group mb-2">
-                            <label for="" class="sr-only">Place Holder</label>
-                            <input type="text" readonly class="form-control-plaintext text-center" id="" value="place holder">
-                        </div>
-                    </div>
-                    <div class="col-sm text-center mt-4">
-                        <div class="form-group mb-2">
-                            <label for="" class="sr-only">Place Holder</label>
-                            <input type="text" readonly class="form-control-plaintext text-center" id="" value="place holder">
-                        </div>
-                    </div>
-                    <div class="col-sm text-center mt-4">
-                        <div class="form-group mb-2">
-                            <label for="" class="sr-only">Place Holder</label>
-                            <input type="text" readonly class="form-control-plaintext text-center" id="" value="place holder">
-                        </div>
-                    </div>
-                    <div class="col-sm text-center mt-4">
-                        <div class="form-group mb-2">
-                            <label for="" class="sr-only">Place Holder</label>
-                            <input type="text" readonly class="form-control-plaintext text-center" id="" value="place holder">
-                        </div>
+                        <input type="button" name="getWeather" value="DownloadInfo" class="btn btn-lg btn-primary hover-top btn-glow w-50" id="weatherButton" onclick="getWeatherData()">
                     </div>
                 </div>
                 <div class="row">
@@ -328,7 +290,6 @@
     <script src="vendors/is/is.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="src/js/OpenUvApi.js"></script>
     <script src="src/js/SolarInput.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>

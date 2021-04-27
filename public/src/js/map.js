@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicnVhbmp2djIzIiwiYSI6ImNra3pzdnNjNDBtcm4ycHFvcGticGxnNmgifQ.ycPq0Fz2eyZlaRgTle9NQg';
 
-let lat;
-let long;
+// let lat;
+// let long;
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -43,40 +43,6 @@ function getWeatherData() {
         // handle error
         window.alert(error);
     })
-
-
-}
-
-function dowloadDataAsCSV(data) {
-    neededDataForMl = [];
-    data.list.forEach(w => {
-        let date = w.dt_txt;
-        let temp_max = (w.main.temp_max - 273.15).toFixed(2);
-        let temp_min = (w.main.temp_min - 273.15).toFixed(2);
-        let pressure = w.main.pressure;
-        console.log(typeof date);
-        neededDataForMl.push({
-            date,
-            temp_min,
-            temp_max,
-            pressure
-        })
-    })
-
-    const items = neededDataForMl
-    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-    const header = Object.keys(items[0])
-    const csv = [
-        header.join(','), // header row first
-        ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-    ].join('\r\n')
-
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'data_tamar.csv';
-    hiddenElement.click();
-    console.log(csv);
 }
 
 function makeChart(data) {
@@ -118,10 +84,119 @@ function makeChart(data) {
             }
         }
     });
-
-    // TODO: put next line in comment to stop downloading CSV file when clicking "weather data"
-    dowloadDataAsCSV(data);
+    getUVIndex(data);
 }
+
+function getUVIndex(dataWeather) {
+    // TODO: delete next 2 lines if you want the position of mapbox
+    lat = 52.946034;
+    lng = -1.139356;
+
+    $.ajax({
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function(request) {
+            request.setRequestHeader('x-access-token', '6756ecb3ebdab1e6478f6c18028c83c0');
+        },
+        url: 'https://api.openuv.io/api/v1/forecast?lat=' + lat + '&lng=' + lng,
+        success: function(response) {
+            getUvIndexTomorrow(response.result, dataWeather);
+        },
+        error: function(response) {
+            window.alert(response.message);
+        }
+    });
+
+
+}
+
+function getUvIndexTomorrow(uvInfoToday, dataWeather) {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    // TODO: delete next 2 lines if you want the position of mapbox
+    lat = 52.946034;
+    lng = -1.139356;
+
+    $.ajax({
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: function(request) {
+            request.setRequestHeader('x-access-token', '6756ecb3ebdab1e6478f6c18028c83c0');
+        },
+        url: 'https://api.openuv.io/api/v1/forecast?lat=' + lat + '&lng=' + lng + '&dt=' + tomorrow.toISOString(),
+        success: function(response) {
+            let uvTomorrow = response.result;
+            uvTomorrow.forEach(u => {
+                uvInfoToday.push(u);
+            });
+            // TODO: put next line in comment to stop downloading CSV file when clicking "weather data"
+            dowloadUvDataAsCSV(uvInfoToday, dataWeather);
+        },
+        error: function(response) {
+            window.alert(response.message);
+        }
+    });
+
+
+}
+
+
+function dowloadUvDataAsCSV(uvData, weatherData) {
+    neededDataForMl = [];
+    for(i = 0; i<=16; i++) {
+        w=weatherData.list[i];
+        let date = w.dt_txt;
+        let temp_max = (w.main.temp_max - 273.15).toFixed(2);
+        let temp_min = (w.main.temp_min - 273.15).toFixed(2);
+        let pressure = w.main.pressure;
+        let SunPositionAltitude = "unknown";
+        let SunPositionAzimuth = "unknown";
+        let Uv = 0;
+        uvData.forEach(u => {
+            let Time = u.uv_time;
+            let splitDateTime = Time.split("T");
+            let splitTime = splitDateTime[1].split(":");
+            let splitTimeMin = parseInt(splitTime[0]);
+            if (parseInt(splitTime[1]) >= 30) {
+                splitTimeMin += 1;
+                splitTime[0] = splitTimeMin;
+            }
+            let myDateTime = splitDateTime[0] +" "+splitTime[0]+":00:00"
+            if(myDateTime == date) {
+                SunPositionAltitude = u.sun_position.altitude;
+                SunPositionAzimuth = u.sun_position.azimuth;
+                Uv = u.uv;
+            }
+        })
+        neededDataForMl.push({
+            date,
+            temp_min,
+            temp_max,
+            pressure,
+            SunPositionAltitude,
+            SunPositionAzimuth,
+            Uv
+        })
+    }
+    const items = neededDataForMl;
+    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+    const header = Object.keys(items[0])
+    const csv = [
+        header.join(','), // header row first
+        ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+    ].join('\r\n')
+
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'allData.csv';
+    hiddenElement.click();
+}
+
+
+
 
 function getTemperatures(data) {
     let arrayTemps = [];
