@@ -2,6 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicnVhbmp2djIzIiwiYSI6ImNra3pzdnNjNDBtcm4ycHFvc
 
 // let lat;
 // let long;
+let neededDataForMl = [];
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -20,6 +21,7 @@ map.addControl(geocoder);
 
 
 geocoder.on('results', function(response) {
+    console.log(response.request.response.body.features);
     var array = response.request.response.body.features;
     var coordinates = array[0].geometry.coordinates;
     lat = coordinates[1];
@@ -91,6 +93,7 @@ function getUVIndex(dataWeather) {
     // TODO: delete next 2 lines if you want the position of mapbox
     lat = 52.946034;
     lng = -1.139356;
+    console.log("tried");
 
     $.ajax({
         type: 'GET',
@@ -103,6 +106,7 @@ function getUVIndex(dataWeather) {
             getUvIndexTomorrow(response.result, dataWeather);
         },
         error: function(response) {
+            console.log("failed");
             window.alert(response.message);
         }
     });
@@ -132,7 +136,7 @@ function getUvIndexTomorrow(uvInfoToday, dataWeather) {
                 uvInfoToday.push(u);
             });
             // TODO: put next line in comment to stop downloading CSV file when clicking "weather data"
-            dowloadUvDataAsCSV(uvInfoToday, dataWeather);
+            makeCsvFromWeatherAndUv(uvInfoToday, dataWeather);
         },
         error: function(response) {
             window.alert(response.message);
@@ -143,8 +147,8 @@ function getUvIndexTomorrow(uvInfoToday, dataWeather) {
 }
 
 
-function dowloadUvDataAsCSV(uvData, weatherData) {
-    neededDataForMl = [];
+function makeCsvFromWeatherAndUv(uvData, weatherData) {
+    // neededDataForMl = [];
     for(i = 0; i<=16; i++) {
         w=weatherData.list[i];
         let date = w.dt_txt;
@@ -180,23 +184,7 @@ function dowloadUvDataAsCSV(uvData, weatherData) {
             Uv
         })
     }
-    const items = neededDataForMl;
-    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-    const header = Object.keys(items[0])
-    const csv = [
-        header.join(','), // header row first
-        ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-    ].join('\r\n')
-
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'allData.csv';
-    hiddenElement.click();
 }
-
-
-
 
 function getTemperatures(data) {
     let arrayTemps = [];
@@ -208,4 +196,34 @@ function getTemperatures(data) {
     }
     array = [arrayLabels, arrayTemps];
     return array;
+}
+
+function downloadCsv() {
+
+    let capacity = document.getElementById("solarPanelCapacityRange").value;
+    let consumptionDay = document.getElementById("solarPanelConsumptionDay").value;
+    let consumptionNight = document.getElementById("solarPanelConsumptionNight").value;
+    let azimuth = document.getElementById("solarPanelazimuth").value;
+    let orientation = document.getElementById("solarPanelOrientation").value;
+    let pitch = document.getElementById("solarPanelPitch").value;
+    neededDataForMl.forEach(d => {
+        d["capacity"] = capacity;
+        d["consumptionDay"] = consumptionDay;
+        d["consumptionNight"] = consumptionNight;
+        d["azimuth "] = azimuth ;
+        d["orientation"] = orientation;
+        d["pitch"] = pitch;
+    })
+    const items = neededDataForMl;
+    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+    const header = Object.keys(items[0])
+    const csv = [
+        header.join(','), // header row first
+        ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+    ].join('\r\n')
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'allData.csv';
+    hiddenElement.click();
 }
