@@ -158,6 +158,7 @@ function makeCsvFromWeatherAndUv(uvData, weatherData) {
         let SunPositionAltitude = "unknown";
         let SunPositionAzimuth = "unknown";
         let Uv = 0;
+        let apiReturned = 0;
         uvData.forEach(u => {
             let Time = u.uv_time;
             let splitDateTime = Time.split("T");
@@ -174,6 +175,9 @@ function makeCsvFromWeatherAndUv(uvData, weatherData) {
                 Uv = u.uv;
             }
         })
+        if(SunPositionAltitude != "unknown") {
+            apiReturned = 1;
+        }
         neededDataForMl.push({
             date,
             temp_min,
@@ -181,7 +185,8 @@ function makeCsvFromWeatherAndUv(uvData, weatherData) {
             pressure,
             SunPositionAltitude,
             SunPositionAzimuth,
-            Uv
+            Uv,
+            apiReturned
         })
     }
 }
