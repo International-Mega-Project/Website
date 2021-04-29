@@ -201,18 +201,57 @@ function getTemperatures(data) {
 function downloadCsv() {
 
     let capacity = document.getElementById("solarPanelCapacityRange").value;
-    let consumptionDay = document.getElementById("solarPanelConsumptionDay").value;
-    let consumptionNight = document.getElementById("solarPanelConsumptionNight").value;
-    let azimuth = document.getElementById("solarPanelazimuth").value;
-    let orientation = document.getElementById("solarPanelOrientation").value;
+    // TODO: uncomment these 2 if we want consumption
+    // let consumptionDay = document.getElementById("solarPanelConsumptionDay").value;
+    // let consumptionNight = document.getElementById("solarPanelConsumptionNight").value;
+    let orientation_value = document.getElementById("solarPanelOrientation").value;
+    console.log(orientation_value);
+    let orientation = "NOT SET";
+    switch(orientation_value) {
+        case "1":
+            orientation = "NORTH";
+            break;
+        case "2":
+            orientation = "NORTH_EAST"
+            break;
+        case "3":
+            orientation = "NORTH_SOUTH"
+            break;
+        case "4":
+            orientation = "NORTH_WEST"
+            break;
+        case "5":
+            orientation = "EAST"
+            break;
+        case "6":
+            orientation = "EAST_SOUTH"
+            break;
+        case "7":
+            orientation = "EAST_WEST"
+            break;
+        case "8":
+            orientation = "SOUTH"
+            break;
+        case "9":
+            orientation = "SOUTH_WEST"
+            break;
+        case "10":
+            orientation = "WEST"
+            break;
+        default:
+            orientation = "NOT SET";
+    }
+    console.log(orientation);
     let pitch = document.getElementById("solarPanelPitch").value;
+    let panelAzimuth = document.getElementById("solarPanelazimuth").value;
     neededDataForMl.forEach(d => {
         d["capacity"] = capacity;
-        d["consumptionDay"] = consumptionDay;
-        d["consumptionNight"] = consumptionNight;
-        d["azimuth "] = azimuth ;
+        // TODO: uncomment these 2 if we want consumption
+        // d["consumptionDay"] = consumptionDay;
+        // d["consumptionNight"] = consumptionNight;
         d["orientation"] = orientation;
         d["pitch"] = pitch;
+        d["panelAzimuth"] = panelAzimuth;
     })
     const items = neededDataForMl;
     const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here

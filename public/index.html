@@ -195,50 +195,57 @@
                                     <option value="1">0-100</option>
                                     <option value="2">101-200</option>
                                 </select>
-                                <input type="range" id="solarPanelCapacityRange" min="0" max="10" class="w-100" disabled="true" oninput="DisplayCapatityValue(this.value)">
+                                <input type="range" id="solarPanelCapacityRange" step="0.1" min="0" max="10" class="w-100" disabled="true" oninput="DisplayCapatityValue(this.value)">
                             </div>
-                            <div class="form-group mt-2">
-                                <label for="solarPanelConsumptionRangeDay" id="solarPanelConsumptionLabelDay">Average consumption/day</label>
-                                <select class="form-control" id="solarPanelConsumptionRangeDay" onchange="ChangeConsumptionRangeDay(this.value)">
-                                    <option value="0">Select Range</option>
-                                    <option value="1">0-5 Kwh</option>
-                                    <option value="2">5-10 Kwh</option>
-                                    <option value="3">10-15 Kwh</option>
-                                </select>
-                                <input type="range" id="solarPanelConsumptionDay" min="0" max="10" class="w-100" disabled="true" oninput="DisplayConsumptionValueDay(this.value)">
-                            </div>
-                            <div class="form-group mt-2">
-                                <label for="solarPanelConsumptionRangeDay" id="solarPanelConsumptionLabelNight">Average consumption/night</label>
-                                <select class="form-control" id="solarPanelConsumptionRangeNight" onchange="ChangeConsumptionRangeNight(this.value)">
-                                    <option value="0">Select Range</option>
-                                    <option value="1">0-7 Kwh</option>
-                                    <option value="2">7-14 Kwh</option>
-                                    <option value="3">14-20 Kwh</option>
-                                </select>
-                                <input type="range" id="solarPanelConsumptionNight" min="0" max="10" class="w-100" disabled="true" oninput="DisplayConsumptionValueNight(this.value)">
-                            </div>
-                            <div class="form-group mt-2">
-                                <label for="solarPanelazimuth">Solar panel azimuth:</label>
-                                <input type="text" class="form-control" id="solarPanelazimuth" placeholder="Azimuth" />
-                            </div>
+<!--                            <div class="form-group mt-2">-->
+<!--                                <label for="solarPanelConsumptionRangeDay" id="solarPanelConsumptionLabelDay">Average consumption/day</label>-->
+<!--                                <select class="form-control" id="solarPanelConsumptionRangeDay" onchange="ChangeConsumptionRangeDay(this.value)">-->
+<!--                                    <option value="0">Select Range</option>-->
+<!--                                    <option value="1">0-5 Kwh</option>-->
+<!--                                    <option value="2">5-10 Kwh</option>-->
+<!--                                    <option value="3">10-15 Kwh</option>-->
+<!--                                </select>-->
+<!--                                <input type="range" id="solarPanelConsumptionDay" min="0" max="10" class="w-100" disabled="true" oninput="DisplayConsumptionValueDay(this.value)">-->
+<!--                            </div>-->
+<!--                            <div class="form-group mt-2">-->
+<!--                                <label for="solarPanelConsumptionRangeDay" id="solarPanelConsumptionLabelNight">Average consumption/night</label>-->
+<!--                                <select class="form-control" id="solarPanelConsumptionRangeNight" onchange="ChangeConsumptionRangeNight(this.value)">-->
+<!--                                    <option value="0">Select Range</option>-->
+<!--                                    <option value="1">0-7 Kwh</option>-->
+<!--                                    <option value="2">7-14 Kwh</option>-->
+<!--                                    <option value="3">14-20 Kwh</option>-->
+<!--                                </select>-->
+<!--                                <input type="range" id="solarPanelConsumptionNight" min="0" max="10" class="w-100" disabled="true" oninput="DisplayConsumptionValueNight(this.value)">-->
+<!--                            </div>-->
                             <div class="form-group mt-2">
                                 <label for="solarPanelOrientation">Solar panel orientation:</label>
                                 <select class="form-control" id="solarPanelOrientation">
                                     <option value="0">Select Orientation</option>
                                     <option value="1">North</option>
-                                    <option value="3">North East</option>
-                                    <option value="4">East</option>
-                                    <option value="5">South East</option>
-                                    <option value="6">South</option>
-                                    <option value="7">South West</option>
-                                    <option value="8">West</option>
-                                    <option value="9">North West</option>
+                                    <option value="2">North East</option>
+                                    <option value="3">North South</option>
+                                    <option value="4">North West</option>
+                                    <option value="5">East</option>
+                                    <option value="6">East-south</option>
+                                    <option value="7">East-west</option>
+                                    <option value="8">South</option>
+                                    <option value="9">South West</option>
+                                    <option value="10">West</option>
+
                                 </select>
                             </div>
+
+                            <div class="form-group mt-2">
+                                <label for="solarPanelazimuth">Solar panel azimuth:</label>
+                                <input type="text" class="form-control" id="solarPanelazimuth" placeholder="Azimuth" />
+                            </div>
+
                             <div class="form-group mt-2">
                                 <label for="solarPanelpitch" id="solarPanelPitchLabel">Solar panel pitch:</label>
                                 <input type="range" id="solarPanelPitch" min="0" max="90" class="w-100" oninput="DisplayPitchValue(this.value)">
                             </div>
+
+
                             <div class="form-group text-center mt-2">
                                 <input type="button" class="btn btn-primary mb-2 m-1 button-width" onclick="downloadCsv()">Confirm</input>
                             </div>
