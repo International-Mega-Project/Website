@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicnVhbmp2djIzIiwiYSI6ImNra3pzdnNjNDBtcm4ycHFvc
 
 // let lat;
 // let long;
-let neededDataForMl = [];
+// let neededDataForMl = [];
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -142,13 +142,11 @@ function getUvIndexTomorrow(uvInfoToday, dataWeather) {
             window.alert(response.message);
         }
     });
-
-
 }
 
 
 function makeCsvFromWeatherAndUv(uvData, weatherData) {
-    // neededDataForMl = [];
+    neededDataForMl = [];
     for(i = 0; i<=16; i++) {
         w=weatherData.list[i];
         let date = w.dt_txt;
@@ -270,4 +268,19 @@ function downloadCsv() {
     hiddenElement.target = '_blank';
     hiddenElement.download = 'allData.csv';
     hiddenElement.click();
+}
+
+
+function use() {
+    console.log("test");
+    axios({
+        method: 'get',
+        url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=25.7479&lon=28.2293&key=c5f7c576b31747f99a3ed88f16ae9678&hours=24',
+    }).then(function(response) {
+        // handle success
+        console.log(response);
+    }).catch(function(error) {
+        // handle error
+        window.alert(error);
+    })
 }
