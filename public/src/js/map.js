@@ -288,6 +288,11 @@ function use() {
 }
 
 function dowloadWeatherBitDataAsCSV(collection) {
+    let solarCapacity = document.getElementById("solarPanelCapacityRange").value;
+    let solarOrientation = getOrientationName(document.getElementById("solarPanelOrientation").value);
+    let solarAzimuth = document.getElementById("solarPanelazimuth").value;
+    let solarPitch = document.getElementById("solarPanelPitch").value;
+
     let weatherData = [];
     for (let index = 0; index < collection.data.length; index++) {
         let lat = collection.lat;
@@ -302,7 +307,7 @@ function dowloadWeatherBitDataAsCSV(collection) {
         let uv = collection.data[index].uv;
         let weatherDescription = collection.data[index].weather.description;
         let weatherCode = collection.data[index].weather.code;
-        weatherData.push({ lat, long, dateTime, clouds, ozone, presure, snow, solarRadiation, temp, uv, weatherDescription, weatherCode });
+        weatherData.push({ lat, long, dateTime, clouds, ozone, presure, snow, solarRadiation, temp, uv, weatherDescription, weatherCode, solarCapacity, solarOrientation, solarAzimuth, solarPitch });
     }
     const items = weatherData
     const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
@@ -318,4 +323,39 @@ function dowloadWeatherBitDataAsCSV(collection) {
     hiddenElement.download = 'WeatherData.csv';
     hiddenElement.click();
     //console.log(csv);
+}
+
+function getOrientationName(input) {
+    let myorientationuse = input + "";
+    console.log(myorientationuse + "   wqqweqeqwe")
+    let orientationName = "";
+    switch (myorientationuse) {
+        case "1":
+            orientationName = "North";
+            break;
+        case "2":
+            orientationName = "North East";
+            break;
+        case "3":
+            orientationName = "East";
+            break;
+        case "4":
+            orientationName = "South East";
+            break;
+        case "5":
+            orientationName = "South";
+            break;
+        case "6":
+            orientationName = "South West";
+            break;
+        case "7":
+            orientationName = "West";
+            break;
+        case "8":
+            orientationName = "North West";
+            break;
+        default:
+            orientationName = "NotSelected";
+    }
+    return orientationName
 }
