@@ -144,11 +144,10 @@ function getUvIndexTomorrow(uvInfoToday, dataWeather) {
     });
 }
 
-
 function makeCsvFromWeatherAndUv(uvData, weatherData) {
     neededDataForMl = [];
-    for(i = 0; i<=16; i++) {
-        w=weatherData.list[i];
+    for (i = 0; i <= 16; i++) {
+        w = weatherData.list[i];
         let date = w.dt_txt;
         let temp_max = (w.main.temp_max - 273.15).toFixed(2);
         let temp_min = (w.main.temp_min - 273.15).toFixed(2);
@@ -166,14 +165,14 @@ function makeCsvFromWeatherAndUv(uvData, weatherData) {
                 splitTimeMin += 1;
                 splitTime[0] = splitTimeMin;
             }
-            let myDateTime = splitDateTime[0] +" "+splitTime[0]+":00:00"
-            if(myDateTime == date) {
+            let myDateTime = splitDateTime[0] + " " + splitTime[0] + ":00:00"
+            if (myDateTime == date) {
                 SunPositionAltitude = u.sun_position.altitude;
                 SunPositionAzimuth = u.sun_position.azimuth;
                 Uv = u.uv;
             }
         })
-        if(SunPositionAltitude != "unknown") {
+        if (SunPositionAltitude != "unknown") {
             apiReturned = 1;
         }
         neededDataForMl.push({
@@ -210,7 +209,7 @@ function downloadCsv() {
     let orientation_value = document.getElementById("solarPanelOrientation").value;
     console.log(orientation_value);
     let orientation = "NOT SET";
-    switch(orientation_value) {
+    switch (orientation_value) {
         case "1":
             orientation = "NORTH";
             break;
@@ -270,17 +269,51 @@ function downloadCsv() {
     hiddenElement.click();
 }
 
-
 function use() {
-    console.log("test");
+    let mapLat = document.getElementById("mapLat").textContent;
+    let mapLong = document.getElementById("mapLong").textContent;
     axios({
         method: 'get',
-        url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=25.7479&lon=28.2293&key=c5f7c576b31747f99a3ed88f16ae9678&hours=24',
+        url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=' + mapLat + '&lon=' + mapLong + '&key=c5f7c576b31747f99a3ed88f16ae9678&hours=24',
     }).then(function(response) {
         // handle success
-        console.log(response);
+        var datacollection = response.data
+        dowloadWeatherBitDataAsCSV(datacollection);
     }).catch(function(error) {
         // handle error
         window.alert(error);
     })
+}
+
+function dowloadWeatherBitDataAsCSV(collection) {
+    let weatherData = [];
+    for (let index = 0; index < collection.data.length; index++) {
+        let lat = collection.lat;
+        let long = collection.lon;
+        let dateTime = collection.data[index].datetime;
+        let clouds = collection.data[index].clouds;
+        let ozone = collection.data[index].ozone;
+        let presure = collection.data[index].pres;
+        let snow = collection.data[index].snow;
+        let solarRadiation = collection.data[index].solar_rad;
+        let temp = collection.data[index].temp;
+        let uv = collection.data[index].uv;
+        let weatherDescription = collection.data[index].weather.description;
+        let weatherCode = collection.data[index].weather.code;
+        weatherData.push({ lat, long, dateTime, clouds, ozone, presure, snow, solarRadiation, temp, uv, weatherDescription, weatherCode });
+    }
+    const items = weatherData
+    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+    const header = Object.keys(items[0])
+    const csv = [
+        header.join(','), // header row first
+        ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+    ].join('\r\n')
+
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'WeatherData.csv';
+    hiddenElement.click();
+    //console.log(csv);
 }
