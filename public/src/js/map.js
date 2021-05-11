@@ -270,6 +270,8 @@ function downloadCsv() {
 }
 
 function use() {
+
+    //21 Queen's Road, Nottingham, NG2 3BE, United Kingdom for building location
     let mapLat = document.getElementById("mapLat").textContent;
     let mapLong = document.getElementById("mapLong").textContent;
     axios({
