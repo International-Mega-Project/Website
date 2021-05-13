@@ -280,6 +280,7 @@ function use() {
     }).then(function(response) {
         // handle success
         var datacollection = response.data
+        console.log(datacollection)
         dowloadWeatherBitDataAsCSV(datacollection);
     }).catch(function(error) {
         // handle error
@@ -297,7 +298,7 @@ function dowloadWeatherBitDataAsCSV(collection) {
     for (let index = 0; index < collection.data.length; index++) {
         let lat = collection.lat;
         let long = collection.lon;
-        let dateTime = collection.data[index].datetime;
+        let dateTimeUTC = collection.data[index].timestamp_utc.replace("T", " ");
         let clouds = collection.data[index].clouds;
         let ozone = collection.data[index].ozone;
         let presure = collection.data[index].pres;
@@ -307,7 +308,7 @@ function dowloadWeatherBitDataAsCSV(collection) {
         let uv = collection.data[index].uv;
         let weatherDescription = collection.data[index].weather.description;
         let weatherCode = collection.data[index].weather.code;
-        weatherData.push({ lat, long, dateTime, clouds, ozone, presure, snow, solarRadiation, temp, uv, weatherDescription, weatherCode, solarCapacity, solarOrientation, solarAzimuth, solarPitch });
+        weatherData.push({ lat, long, dateTimeUTC, clouds, ozone, presure, snow, solarRadiation, temp, uv, weatherDescription, weatherCode, solarCapacity, solarOrientation, solarAzimuth, solarPitch });
     }
     const items = weatherData
     const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
