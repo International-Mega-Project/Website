@@ -63,6 +63,8 @@ function MakeMyChart(data)
         document.getElementById('myChart'),
         config
       );
+
+        makePredictionChart(null);
 }
 
 function use() {
@@ -82,16 +84,16 @@ function use() {
     })
 }
 
-function JsonAddition(jsonOririnal)
+function JsonAddition(jsonOriginal)
 {
-    jsonOririnal.UserInput = 
+    jsonOriginal.UserInput =
     {
         solarCapacity: document.getElementById("solarPanelCapacityRange").value,
         solarOrientation: getOrientationName(document.getElementById("solarPanelOrientation").value),
         solarAzimuth: document.getElementById("solarPanelazimuth").value,
         solarPitch: document.getElementById("solarPanelPitch").value
     };
-    return jsonOririnal;
+    return jsonOriginal;
 }
 
 function getOrientationName(input) {
@@ -126,4 +128,49 @@ function getOrientationName(input) {
             orientationName = "NotSelected";
     }
     return orientationName
+}
+
+
+function makePredictionChart(input) {
+    var labels = [];
+    var temps = [];
+    if(input == null) {
+        labels = ["11:00", "12:00", "13:00", "14:00","15:00", "16:00","17:00", "18:00","19:00", "20:00","21:00", "22:00","23:00", "24:00"];
+        temps = ["10", "15", "20" , "30" , "20", "20", "22", "16", "15", "12", "7", "2","0", "0"];
+    }
+    else {
+        for (let index = 0; index < input.length; index++) {
+            var timedate = input[index].datetime.split(":");
+            labels.push(timedate[1] + ":00");
+            temps.push(input[index].temp)
+        }
+    }
+    var data = {
+        labels: labels,
+        datasets: [{
+            label: 'prediction',
+            backgroundColor: 'rgba(194, 70, 111,0.50)',
+            borderColor: 'rgb(199, 18, 78)',
+            data: temps,
+        }]
+    };
+    const config = {
+        type: 'line',
+        data,
+        options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    };
+
+    var predictionChart = new Chart(
+        document.getElementById('predictionChart'),
+        config
+    );
 }
