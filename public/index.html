@@ -255,11 +255,14 @@
         </section>
 
         <section class="bg-100 py-5" id="predictionSection">
-            <div id="predictionchartZone" class="text-center">
-                <canvas id="predictionChart"></canvas>
+            <div class="container mapGridColHeight">
+                <div class="row">
+                    <div class="col-sm mapGridColHeight">
+                        <canvas id="predictionChart" style="position: relative" height="80%"></canvas>
+                    </div>
+                </div>
             </div>
 
-            <div class="clearfix"></div>
 
         </section>
 
@@ -317,6 +320,7 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="src/js/map.js"></script>
     <script src="vendors/@popperjs/popper.min.js"></script>
     <script src="vendors/bootstrap/bootstrap.min.js"></script>
@@ -324,7 +328,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="assets/js/theme.js"></script>
     <script src="src/js/SolarInput.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">

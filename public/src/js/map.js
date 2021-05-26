@@ -25,6 +25,9 @@ geocoder.on('results', function(response) {
     document.getElementById('mapLat').innerHTML = lat;
     document.getElementById('mapLong').innerHTML = long;
 })
+
+makePredictionChart(null);
+
 function MakeMyChart(data)
 {
     console.log(data);
