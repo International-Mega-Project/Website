@@ -79,9 +79,10 @@ function use() {
         method: 'get',
         url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=' + mapLat + '&lon=' + mapLong + '&key=c5f7c576b31747f99a3ed88f16ae9678&hours=24',
     }).then(function(response) {
-        var JsonData = JsonAddition(response.data)
-        JsonAddition(JsonData)
-        MakeMyChart(JsonData.data)
+        var JsonData = JsonAddition(response.data);
+        bodyForApi = JsonAddition(JsonData);
+        MakeMyChart(JsonData.data);
+        testApi();
     }).catch(function(error) {
         window.alert(error);
     })
@@ -185,10 +186,9 @@ function testApi() {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Accept", "application/json");
 
-    var raw = JSON.stringify({
-        "name": "jordi"
-    });
-
+    var raw = JSON.stringify(bodyForApi);
+    console.log("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+    console.log(raw);
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
