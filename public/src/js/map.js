@@ -136,16 +136,17 @@ function getOrientationName(input) {
 
 function makePredictionChart(input) {
     var labels = [];
-    var temps = [];
+    var providedPower = [];
     if(input == null) {
         labels = ["11:00", "12:00", "13:00", "14:00","15:00", "16:00","17:00", "18:00","19:00", "20:00","21:00", "22:00","23:00", "24:00"];
-        temps = ["10", "15", "20" , "30" , "20", "20", "22", "16", "15", "12", "7", "2","0", "0"];
+        providedPower = ["10", "15", "20" , "30" , "20", "20", "22", "16", "15", "12", "7", "2","0", "0"];
     }
     else {
-        for (let index = 0; index < input.length; index++) {
-            var timedate = input[index].datetime.split(":");
-            labels.push(timedate[1] + ":00");
-            temps.push(input[index].temp)
+        for (var key in input) {
+            if (input.hasOwnProperty(key)) {
+                labels.push(key);
+                providedPower.push(input[key]);
+            }
         }
     }
     var data = {
@@ -154,7 +155,7 @@ function makePredictionChart(input) {
             label: 'prediction',
             backgroundColor: 'rgba(194, 70, 111,0.50)',
             borderColor: 'rgb(199, 18, 78)',
-            data: temps,
+            data: providedPower,
         }]
     };
     const config = {
@@ -197,6 +198,6 @@ function testApi() {
 
     fetch("http://localhost:8000/api/postdata", requestOptions)
         .then(response => response.json())
-        .then(result => console.log(result))
+        .then(result => makePredictionChart(result))
         .catch(error => console.log('error', error));
 }
