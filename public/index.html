@@ -181,7 +181,7 @@
                 </div>
                 <div class="row">
                     <div class="col mt-4">
-                        <form class="mapform p-3" id="inputFormSolarSystem">
+                        <form class="mapform p-3" id="inputFormSolarSystem" onsubmit="return use()">
                             <!--                            <div class="form-group">-->
                             <!--                                <label for="solarPanelManufacturer">Solar panel manufacturer:</label>-->
                             <!--                                <input type="text" class="form-control" id="solarPanelManufacturer" placeholder="Manufacturer" />-->
@@ -192,12 +192,12 @@
                             <!--                            </div>-->
                             <div class="form-group mt-2">
                                 <label for="solarPanelCapacity" id="solarpanelCapacity">Solar panel installed capacity:</label>
-                                <select class="form-control" onchange="ChangeProductionRange(this.value)">
-                                    <option value="0">Select Range</option>
+                                <select class="form-control" onchange="ChangeProductionRange(this.value)" required>
+                                    <option value="">Select Range</option>
                                     <option value="1">0-100</option>
                                     <option value="2">101-200</option>
                                 </select>
-                                <input type="range" id="solarPanelCapacityRange" step="0.1" min="0" max="10" class="w-100" disabled="true" oninput="DisplayCapatityValue(this.value)">
+                                <input type="range" id="solarPanelCapacityRange" step="0.1" min="0" max="10" class="w-100" disabled="true" oninput="DisplayCapatityValue(this.value)" required>
                             </div>
                             <!--                            <div class="form-group mt-2">-->
                             <!--                                <label for="solarPanelConsumptionRangeDay" id="solarPanelConsumptionLabelDay">Average consumption/day</label>-->
@@ -221,8 +221,8 @@
                             <!--                            </div>-->
                             <div class="form-group mt-2">
                                 <label for="solarPanelOrientation">Solar panel orientation:</label>
-                                <select class="form-control" id="solarPanelOrientation">
-                                    <option value="0">Select Orientation</option>
+                                <select class="form-control" id="solarPanelOrientation" required>
+                                    <option value="">Select Orientation</option>
                                     <option value="1">North</option>
                                     <option value="2">North East</option>
                                     <option value="3">East</option>
@@ -241,12 +241,12 @@
 
                             <div class="form-group mt-2">
                                 <label for="solarPanelpitch" id="solarPanelPitchLabel">Solar panel pitch:</label>
-                                <input type="range" id="solarPanelPitch" min="0" max="90" class="w-100" oninput="DisplayPitchValue(this.value)">
+                                <input type="range" id="solarPanelPitch" min="0" max="90" class="w-100" oninput="DisplayPitchValue(this.value)" required>
                             </div>
 
 
                             <div class="form-group text-center mt-2">
-                                <input type="button" class="btn btn-primary mb-2 m-1 button-width" onclick="use()" value="Confirm">
+                                <input type="submit" class="btn btn-primary mb-2 m-1 button-width" value="Confirm">
                             </div>
 
                         </form>

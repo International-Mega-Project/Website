@@ -74,6 +74,9 @@ function use() {
     //21 Queen's Road, Nottingham, NG2 3BE, United Kingdom for building location
     let mapLat = document.getElementById("mapLat").textContent;
     let mapLong = document.getElementById("mapLong").textContent;
+    if (!ISUserRangeValid()) {
+        return false;
+    }
     axios({
         method: 'get',
         url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=' + mapLat + '&lon=' + mapLong + '&key=c5f7c576b31747f99a3ed88f16ae9678&hours=24',
@@ -84,6 +87,8 @@ function use() {
     }).catch(function(error) {
         window.alert(error);
     })
+
+    return false;
 }
 
 function JsonAddition(jsonOriginal) {
@@ -130,7 +135,6 @@ function getOrientationName(input) {
     return orientationName
 }
 
-
 function makePredictionChart(input) {
     var labels = [];
     var providedPower = [];
@@ -175,7 +179,6 @@ function makePredictionChart(input) {
     );
 }
 
-
 function testApi(input) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -195,4 +198,16 @@ function testApi(input) {
         .then(response => response.json())
         .then(result => makePredictionChart(result))
         .catch(error => console.log('error', error));
+}
+
+function ISUserRangeValid() {
+    if (document.getElementById("solarPanelCapacityRange").value <= 0 || document.getElementById("solarPanelPitch").value <= 0) {
+        alert("Please insure that panel capacity and panel pitch is greater than 0");
+        return false
+    }
+    if (isNaN(document.getElementById("solarPanelazimuth").value) || document.getElementById("solarPanelazimuth").value.trim().length <= 0) {
+        alert("Please insure that panel azimuth is a number");
+        return false
+    }
+    return true
 }
