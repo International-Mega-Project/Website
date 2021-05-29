@@ -28,26 +28,25 @@ geocoder.on('results', function(response) {
 
 makePredictionChart(null);
 
-function MakeMyChart(data)
-{
+function MakeMyChart(data) {
     console.log(data);
     var labels = [];
     var temps = [];
-      for (let index = 0; index < data.length; index++) {
-          var timedate = data[index].datetime.split(":");
+    for (let index = 0; index < data.length; index++) {
+        var timedate = data[index].datetime.split(":");
         labels.push(timedate[1] + ":00");
         temps.push(data[index].temp)
-      }
-      var data = {
+    }
+    var data = {
         labels: labels,
         datasets: [{
-          label: 'Temp',
-          backgroundColor: 'rgba(194, 70, 111,0.50)',
-          borderColor: 'rgb(199, 18, 78)',
-          data: temps,
+            label: 'Temp',
+            backgroundColor: 'rgba(194, 70, 111,0.50)',
+            borderColor: 'rgb(199, 18, 78)',
+            data: temps,
         }]
-      };
-      const config = {
+    };
+    const config = {
         type: 'line',
         data,
         options: {
@@ -60,14 +59,14 @@ function MakeMyChart(data)
                 }]
             }
         }
-      };
+    };
 
-      var myChart = new Chart(
+    var myChart = new Chart(
         document.getElementById('myChart'),
         config
-      );
+    );
 
-        makePredictionChart(null);
+    makePredictionChart(null);
 }
 
 function use() {
@@ -80,18 +79,15 @@ function use() {
         url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=' + mapLat + '&lon=' + mapLong + '&key=c5f7c576b31747f99a3ed88f16ae9678&hours=24',
     }).then(function(response) {
         var JsonData = JsonAddition(response.data);
-        bodyForApi = JsonAddition(JsonData);
         MakeMyChart(JsonData.data);
-        testApi();
+        testApi(JsonData);
     }).catch(function(error) {
         window.alert(error);
     })
 }
 
-function JsonAddition(jsonOriginal)
-{
-    jsonOriginal.UserInput =
-    {
+function JsonAddition(jsonOriginal) {
+    jsonOriginal.UserInput = {
         solarCapacity: document.getElementById("solarPanelCapacityRange").value,
         solarOrientation: getOrientationName(document.getElementById("solarPanelOrientation").value),
         solarAzimuth: document.getElementById("solarPanelazimuth").value,
@@ -138,11 +134,10 @@ function getOrientationName(input) {
 function makePredictionChart(input) {
     var labels = [];
     var providedPower = [];
-    if(input == null) {
-        labels = ["11:00", "12:00", "13:00", "14:00","15:00", "16:00","17:00", "18:00","19:00", "20:00","21:00", "22:00","23:00", "24:00"];
-        providedPower = ["10", "15", "20" , "30" , "20", "20", "22", "16", "15", "12", "7", "2","0", "0"];
-    }
-    else {
+    if (input == null) {
+        labels = ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"];
+        providedPower = ["10", "15", "20", "30", "20", "20", "22", "16", "15", "12", "7", "2", "0", "0"];
+    } else {
         for (var key in input) {
             if (input.hasOwnProperty(key)) {
                 labels.push(key);
@@ -181,18 +176,18 @@ function makePredictionChart(input) {
 }
 
 
-function testApi() {
+function testApi(input) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Accept", "application/json");
 
-    var raw = JSON.stringify(bodyForApi);
+    //var raw = JSON.stringify(bodyForApi);
     console.log("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
-    console.log(raw);
+    console.log(input);
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: raw,
+        body: input,
         redirect: 'follow'
     };
 
