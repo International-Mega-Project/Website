@@ -140,7 +140,7 @@ function makePredictionChart(input) {
     var providedPower = [];
     if (input == null) {
         labels = ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"];
-        providedPower = ["10", "15", "20", "30", "20", "20", "22", "16", "15", "12", "7", "2", "0", "0"];
+        providedPower = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];
     } else {
         for (var key in input) {
             if (input.hasOwnProperty(key)) {
@@ -154,7 +154,6 @@ function makePredictionChart(input) {
         datasets: [{
             label: 'prediction',
             backgroundColor: 'rgba(194, 70, 111,0.50)',
-            borderColor: 'rgb(199, 18, 78)',
             data: providedPower,
         }]
     };
@@ -183,14 +182,10 @@ function testApi(input) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Accept", "application/json");
-
-    //var raw = JSON.stringify(bodyForApi);
-    console.log("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
-    console.log(input);
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: input,
+        body: JSON.stringify(input),
         redirect: 'follow'
     };
 
