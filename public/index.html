@@ -62,7 +62,7 @@
                         <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#services">services</a></li>
                     </ul>
                     <form class="ps-lg-5">
-<!--                        <button class="btn btn-outline-primary order-0" type="submit">login</button>-->
+                        <!--                        <button class="btn btn-outline-primary order-0" type="submit">login</button>-->
                     </form>
                 </div>
             </div>
@@ -190,12 +190,7 @@
                             <!--                            </div>-->
                             <div class="form-group mt-2">
                                 <label for="solarPanelCapacity" id="solarpanelCapacity">Solar panel installed capacity:</label>
-                                <select class="form-control" onchange="ChangeProductionRange(this.value)" required>
-                                    <option value="">Select Range</option>
-                                    <option value="1">0-100</option>
-                                    <option value="2">101-200</option>
-                                </select>
-                                <input type="range" id="solarPanelCapacityRange" step="0.1" min="0" max="10" class="w-100" disabled="true" oninput="DisplayCapatityValue(this.value)" required>
+                                <input type="text" class="form-control" id="solarPanelCap" placeholder="capacity" />
                             </div>
                             <!--                            <div class="form-group mt-2">-->
                             <!--                                <label for="solarPanelConsumptionRangeDay" id="solarPanelConsumptionLabelDay">Average consumption/day</label>-->
@@ -252,18 +247,20 @@
                 </div>
             </div>
         </section>
-
-        <section class="bg-100 py-5" id="predictionSection">
-            <div class="container mapGridColHeight">
-                <div class="row">
-                    <div class="col-sm mapGridColHeight">
-                        <canvas id="predictionChart" style="position: relative" height="80%"></canvas>
+        <section>
+            <h5 class="mt-3 mb-sm-4 display-4 fw-light lh-sm fs-4 fs-lg-3 fs-xxl-3 text-center">Prediction Results:</h1>
+                <section class="bg-100 py-5" id="predictionSection">
+                    <div class="container mapGridColHeight">
+                        <div class="row">
+                            <div class="col-sm mapGridColHeight">
+                                <canvas id="predictionChart" style="position: relative" height="80%"></canvas>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-
+                </section>
         </section>
+
+
 
         <!-- ============================================-->
         <!-- <section> begin ============================-->

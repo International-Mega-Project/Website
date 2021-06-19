@@ -41,8 +41,8 @@ function MakeMyChart(data) {
         labels: labels,
         datasets: [{
             label: 'Temp',
-            backgroundColor: 'rgba(194, 70, 111,0.50)',
-            borderColor: 'rgb(199, 18, 78)',
+            backgroundColor: 'rgba(80, 158, 41,0.50)',
+            borderColor: 'rgb(80, 158, 41)',
             data: temps,
         }]
     };
@@ -79,7 +79,7 @@ function use() {
     }
     axios({
         method: 'get',
-        url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=' + mapLat + '&lon=' + mapLong + '&key=c5f7c576b31747f99a3ed88f16ae9678&hours=24',
+        url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=' + mapLat + '&lon=' + mapLong + '&key=2653d8f9fed84bf7b46ddad6d58cb9af&hours=24',
     }).then(function(response) {
         var JsonData = JsonAddition(response.data);
         MakeMyChart(JsonData.data);
@@ -93,7 +93,7 @@ function use() {
 
 function JsonAddition(jsonOriginal) {
     jsonOriginal.UserInput = {
-        solarCapacity: document.getElementById("solarPanelCapacityRange").value,
+        solarCapacity: document.getElementById("solarPanelCap").value,
         solarOrientation: getOrientationName(document.getElementById("solarPanelOrientation").value),
         solarAzimuth: document.getElementById("solarPanelazimuth").value,
         solarPitch: document.getElementById("solarPanelPitch").value
@@ -152,8 +152,8 @@ function makePredictionChart(input) {
     var data = {
         labels: labels,
         datasets: [{
-            label: 'prediction',
-            backgroundColor: 'rgba(194, 70, 111,0.50)',
+            label: 'Results',
+            backgroundColor: 'rgba(80, 158, 41,0.50)',
             data: providedPower,
         }]
     };
@@ -196,12 +196,16 @@ function testApi(input) {
 }
 
 function ISUserRangeValid() {
-    if (document.getElementById("solarPanelCapacityRange").value <= 0 || document.getElementById("solarPanelPitch").value <= 0) {
-        alert("Please insure that panel capacity and panel pitch is greater than 0");
+    if (document.getElementById("solarPanelPitch").value <= 0) {
+        alert("Please insure that panel pitch is greater than 0");
         return false
     }
     if (isNaN(document.getElementById("solarPanelazimuth").value) || document.getElementById("solarPanelazimuth").value.trim().length <= 0) {
         alert("Please insure that panel azimuth is a number");
+        return false
+    }
+    if (isNaN(document.getElementById("solarPanelCap").value) || document.getElementById("solarPanelazimuth").value.trim().length <= 0) {
+        alert("Please insure that panel capacity is a number");
         return false
     }
     return true
