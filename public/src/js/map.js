@@ -1,8 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicnVhbmp2djIzIiwiYSI6ImNra3pzdnNjNDBtcm4ycHFvcGticGxnNmgifQ.ycPq0Fz2eyZlaRgTle9NQg';
 
-let lat;
-let long;
-
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
@@ -20,6 +17,7 @@ map.addControl(geocoder);
 
 
 geocoder.on('results', function(response) {
+    console.log(response.request.response.body.features);
     var array = response.request.response.body.features;
     var coordinates = array[0].geometry.coordinates;
     lat = coordinates[1];
@@ -28,109 +26,187 @@ geocoder.on('results', function(response) {
     document.getElementById('mapLong').innerHTML = long;
 })
 
-function getWeatherData() {
-    axios({
-        method: 'get',
-        url: 'https://v1.nocodeapi.com/jordivhw/ow/tsTdEvkyScufqCGI/byGeoCord/threeHourForecast',
-        //TODO: uncomment next line to use the mapinfo for weather data
-        //params: {lat: lat,long: long},
-        //TODO: put next line in comment to the mapinfo for weather data --> that building karina asked for
-        params: { lat: 52.946034, long: -1.139356 }
-    }).then(function(response) {
-        // handle success
-        makeChart(response.data);
-    }).catch(function(error) {
-        // handle error
-        window.alert(error);
-    })
+makePredictionChart(null);
 
-
-}
-
-function dowloadDataAsCSV(data) {
-    neededDataForMl = [];
-    data.list.forEach(w => {
-        let date = w.dt;
-        let temp_max = (w.main.temp_max - 273.15).toFixed(2);
-        let temp_min = (w.main.temp_min - 273.15).toFixed(2);
-        let pressure = w.main.pressure;
-
-        neededDataForMl.push({
-            date,
-            temp_min,
-            temp_max,
-            pressure
-        })
-    })
-
-    const items = neededDataForMl
-    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-    const header = Object.keys(items[0])
-    const csv = [
-        header.join(','), // header row first
-        ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-    ].join('\r\n')
-
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'data_tamar.csv';
-    hiddenElement.click();
-    console.log(csv);
-}
-
-function makeChart(data) {
-    let label_tempArray = getTemperatures(data);
-
-    const ctx = document.getElementById('myChart');
-    let myChart = new Chart(ctx, {
+function MakeMyChart(data) {
+    console.log(data);
+    var labels = [];
+    var temps = [];
+    for (let index = 0; index < data.length; index++) {
+        var timedate = data[index].datetime.split(":");
+        labels.push(timedate[1] + ":00");
+        temps.push(data[index].temp)
+    }
+    var data = {
+        labels: labels,
+        datasets: [{
+            label: 'Temp',
+            backgroundColor: 'rgba(80, 158, 41,0.50)',
+            borderColor: 'rgb(80, 158, 41)',
+            data: temps,
+        }]
+    };
+    const config = {
         type: 'line',
-        data: {
-            labels: label_tempArray[0],
-            datasets: [{
-                label: data.city.name,
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "rgba(75, 192, 192, 0.4)",
-                borderColor: "rgba(75, 192, 192, 1)",
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHitRadius: 10,
-                data: label_tempArray[1],
-            }]
-        },
+        data,
         options: {
             scales: {
                 yAxes: [{
+                    display: true,
                     ticks: {
-                        // Include a degree sign in the ticks
-                        callback: function(value, index, values) {
-                            return value + "°C";
-                        }
+                        beginAtZero: true
                     }
                 }]
             }
         }
-    });
+    };
 
-    // TODO: put next line in comment to stop downloading CSV file when clicking "weather data"
-    dowloadDataAsCSV(data);
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    makePredictionChart(null);
 }
 
-function getTemperatures(data) {
-    let arrayTemps = [];
-    let arrayLabels = [];
-    for (i = 0; i <= 8; i++) {
-        arrayTemps.push(data.list[i].main.temp - 273.15);
-        let label = data.list[i].dt_txt
-        arrayLabels.push(label.substr(label.length - 8, 5));
+function use() {
+
+    //21 Queen's Road, Nottingham, NG2 3BE, United Kingdom for building location
+    let mapLat = document.getElementById("mapLat").textContent;
+    let mapLong = document.getElementById("mapLong").textContent;
+    if (!ISUserRangeValid()) {
+        return false;
     }
-    array = [arrayLabels, arrayTemps];
-    return array;
+    axios({
+        method: 'get',
+        url: 'https://api.weatherbit.io/v2.0/forecast/hourly?lat=' + mapLat + '&lon=' + mapLong + '&key=2653d8f9fed84bf7b46ddad6d58cb9af&hours=24',
+    }).then(function(response) {
+        var JsonData = JsonAddition(response.data);
+        MakeMyChart(JsonData.data);
+        testApi(JsonData);
+    }).catch(function(error) {
+        window.alert(error);
+    })
+
+    return false;
+}
+
+function JsonAddition(jsonOriginal) {
+    jsonOriginal.UserInput = {
+        solarCapacity: document.getElementById("solarPanelCap").value,
+        solarOrientation: getOrientationName(document.getElementById("solarPanelOrientation").value),
+        solarAzimuth: document.getElementById("solarPanelazimuth").value,
+        solarPitch: document.getElementById("solarPanelPitch").value
+    };
+    return jsonOriginal;
+}
+
+function getOrientationName(input) {
+    let myorientationuse = input + "";
+    let orientationName = "";
+    switch (myorientationuse) {
+        case "1":
+            orientationName = "North";
+            break;
+        case "2":
+            orientationName = "North East";
+            break;
+        case "3":
+            orientationName = "East";
+            break;
+        case "4":
+            orientationName = "South East";
+            break;
+        case "5":
+            orientationName = "South";
+            break;
+        case "6":
+            orientationName = "South West";
+            break;
+        case "7":
+            orientationName = "West";
+            break;
+        case "8":
+            orientationName = "North West";
+            break;
+        default:
+            orientationName = "NotSelected";
+    }
+    return orientationName
+}
+
+function makePredictionChart(input) {
+    var labels = [];
+    var providedPower = [];
+    if (input == null) {
+        labels = ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"];
+        providedPower = ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];
+    } else {
+        for (var key in input) {
+            if (input.hasOwnProperty(key)) {
+                labels.push(key);
+                providedPower.push(input[key]);
+            }
+        }
+    }
+    var data = {
+        labels: labels,
+        datasets: [{
+            label: 'Results',
+            backgroundColor: 'rgba(80, 158, 41,0.50)',
+            data: providedPower,
+        }]
+    };
+    const config = {
+        type: 'line',
+        data,
+        options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    };
+
+    var predictionChart = new Chart(
+        document.getElementById('predictionChart'),
+        config
+    );
+}
+
+function testApi(input) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept", "application/json");
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(input),
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:8000/api/postdata", requestOptions)
+        .then(response => response.json())
+        .then(result => makePredictionChart(result))
+        .catch(error => console.log('error', error));
+}
+
+function ISUserRangeValid() {
+    if (document.getElementById("solarPanelPitch").value <= 0) {
+        alert("Please insure that panel pitch is greater than 0");
+        return false
+    }
+    if (isNaN(document.getElementById("solarPanelazimuth").value) || document.getElementById("solarPanelazimuth").value.trim().length <= 0) {
+        alert("Please insure that panel azimuth is a number");
+        return false
+    }
+    if (isNaN(document.getElementById("solarPanelCap").value) || document.getElementById("solarPanelazimuth").value.trim().length <= 0) {
+        alert("Please insure that panel capacity is a number");
+        return false
+    }
+    return true
 }

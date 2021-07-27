@@ -34,3 +34,7 @@ body {
 .row-height {
     background-color: red;
 }
+
+#predictionchartZone {
+    width: 60%; !important;
+}
